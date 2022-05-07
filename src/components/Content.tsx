@@ -1,14 +1,13 @@
 import '../styles/content.scss';
 import { Genre } from '../types/Genre';
-import { Movie } from '../types/Movie';
 import { MovieList } from './MovieList';
 
 interface ContentProps {
 	selectedGenre: Genre;
-	movies: Movie[];
+	selectedGenreId: number;
 }
 
-export function Content({ selectedGenre, movies }: ContentProps) {
+export function Content({ selectedGenre, selectedGenreId }: ContentProps) {
 	return (
 		<div className='container'>
 			<header>
@@ -17,7 +16,7 @@ export function Content({ selectedGenre, movies }: ContentProps) {
 				</span>
 			</header>
 
-			<MovieList movies={movies} />
+			<MovieList selectedGenreId={selectedGenreId} />
 		</div>
 	);
 }

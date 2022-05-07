@@ -1,18 +1,23 @@
+import { useEffect, useState } from 'react';
+import { api } from '../services/api';
 import '../styles/sidebar.scss';
 import { Genre } from '../types/Genre';
 import { Button } from './Button';
 
 interface SideBarProps {
-	genres: Genre[];
 	selectedGenreId: number;
 	setSelectedGenreId: (id: number) => void;
 }
 
-export function SideBar({
-	genres,
-	selectedGenreId,
-	setSelectedGenreId,
-}: SideBarProps) {
+export function SideBar({ selectedGenreId, setSelectedGenreId }: SideBarProps) {
+	const [genres, setGenres] = useState<Genre[]>([]);
+
+	useEffect(() => {
+		api.get<Genre[]>('genres').then(response => {
+			setGenres(response.data);
+		});
+	}, []);
+
 	function handleClickButton(id: number) {
 		setSelectedGenreId(id);
 	}
