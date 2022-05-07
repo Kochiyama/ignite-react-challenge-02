@@ -5,14 +5,18 @@ import { Button } from './Button';
 interface SideBarProps {
 	genres: Genre[];
 	selectedGenreId: number;
-	handleClick: (id: number) => void;
+	setSelectedGenreId: (id: number) => void;
 }
 
 export function SideBar({
 	genres,
 	selectedGenreId,
-	handleClick,
+	setSelectedGenreId,
 }: SideBarProps) {
+	function handleClickButton(id: number) {
+		setSelectedGenreId(id);
+	}
+
 	return (
 		<nav className='sidebar'>
 			<span>
@@ -25,7 +29,7 @@ export function SideBar({
 						key={String(genre.id)}
 						title={genre.title}
 						iconName={genre.name}
-						onClick={() => handleClick(genre.id)}
+						onClick={() => handleClickButton(genre.id)}
 						selected={selectedGenreId === genre.id}
 					/>
 				))}
